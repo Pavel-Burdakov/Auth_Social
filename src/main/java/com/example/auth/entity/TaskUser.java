@@ -1,8 +1,14 @@
 package com.example.auth.entity;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "TaskUser")
+@Data
 public class TaskUser {
     @Id
     @Column(name = "id")
@@ -10,37 +16,8 @@ public class TaskUser {
     private int id;
     private String userName;
     private String email;
+    @OneToMany(mappedBy = "taskUser", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    private List<Task> taskList;
 
-    public TaskUser(int id, String userName, String email) {
-        this.id = id;
-        this.userName = userName;
-        this.email = email;
-    }
-
-    public TaskUser() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
