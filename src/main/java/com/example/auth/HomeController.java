@@ -43,6 +43,8 @@ public class HomeController {
         return getUserInfo();
     }
 
+
+
     public TaskUserDTO getUserInfo() {
         user = taskUserRepository.findByEmail(email).orElseThrow(EntityNotFoundException::new);
         TaskUserDTO dto = mappingUtils.mapToDto(user);
