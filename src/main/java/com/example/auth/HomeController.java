@@ -40,6 +40,7 @@ public class HomeController {
                 }
                 break;
         }
+
         return getUserInfo();
     }
 
